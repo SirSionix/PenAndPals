@@ -1,0 +1,25 @@
+{
+  "scripts": {
+    "prestart": "tsc usermanager_express.ts",
+    "start": "node usermanager_express.js"
+  },
+  "name": "penandpals",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/body-parser": "*",
+    "@types/es6-promise": "^3.3.0",
+    "@types/express": "^4.16.0",
+    "@types/node": "^10.5.6",
+    "body-parser": "^1.17.1",
+    "express": "^4.16.3",
+    "reflect-metadata": "^0.1.12",
+    "sequelize": "^4.38.0",
+    "sequelize-typescript": "^0.6.5",
+    "sqlite3": "^4.0.2",
+    "tsc": "^1.20150623.0"
+  }
+}
