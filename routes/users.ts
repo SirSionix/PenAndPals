@@ -4,14 +4,18 @@ import {User} from "../models/User";
 
 export const users = Router();
 
+
+// Alle vorhandenen User abfragen
 users.get("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
         res.json(await User.findAll());
+        
     } catch (e) {
         next(e);
     }
 });
 
+// Neuen User erstellen nach der Definition in "User.ts"
 users.post("/new", async (req: Request, res: Response, next: NextFunction) => {
    try {
        let user : User = await User.create(req.body);
@@ -21,6 +25,7 @@ users.post("/new", async (req: Request, res: Response, next: NextFunction) => {
    }
 });
 
+//User wird anhand der ID gelöscht
 users.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {
    let id = req.params['id'];
 
