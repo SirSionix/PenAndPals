@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<title>Startseite</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="pandp.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+    .myLink {display: none}
+</style>
+
+
+<!-- Navigation Bar -->
+<header class="w3-bar w3-white w3-border-bottom w3-xmiddle">
+    <a href="Startseite.html"><img class="image" src="pandplogo_platzhalter.jpg" width="68" height="auto"></a>
+    <button class="w3-button w3-right w3-hover-red w3-text-grey" onclick="self.location.href='Einloggen.html'"></i>Anmelden</button>
+
+</header>
+
+
+<!-- Body -->
+<body class="w3-display-container w3-content" style="max-width:1500px">
+<img class="w3-image w3-hide-small" src="ttgamepicture.jpg" width="auto" height="auto">
+    <div class="w3-display-middle" style="position:absolute; top:300px; width:80%;">
+        <div class="w3-bar w3-black">
+            <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Treffen finden');">Treffen finden</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Treffen anlegen');">Treffen anlegen</button>
+        </div>
+
+        <!-- Tabs -->
+        <div id="Treffen finden" class="w3-container w3-white w3-padding-16 myLink">
+        <div class="w3-row-padding" style="margin:0 -16px;">
+            <div class="w3-half">
+                <label>Ort</label>
+                <input class="w3-input w3-border" type="text" placeholder="Wo ...">
+            </div>
+            <div class="w3-half">
+                <label>Kategorie</label>
+                <input class="w3-input w3-border" type="text" placeholder="Was ...">
+            </div>
+        </div>
+        <p><button class="w3-button w3-dark-grey">Finden</button></p>
+        </div>
+
+        <div id="Treffen anlegen" class="w3-container w3-white w3-padding-16 myLink">
+            <div class="w3-row-padding" style="margin:0 -16px;">
+                <h4> Pflichtangaben</h4>
+
+                <div class="w3-half">
+                    <label>Name</label>
+                    <input class="w3-input w3-border" type="text" placeholder="Eventname ...">
+                </div>
+                <div class="w3-half">
+                    <label>Kategorie</label>
+                   <!--  <input class="w3-input w3-border" type="text" placeholder="Hier Dropdown ..."> -->
+                    <select class="w3-input w3-border" id="kat-dropdown" name="kat"></select>
+                </div>
+                <div class="w3-half">
+                    <label>Ort</label>
+                    <input class="w3-input w3-border" type="text" placeholder="Wo ...">
+                </div>
+                <div class="w3-half">
+                    <label>PLZ</label>
+                    <input class="w3-input w3-border" type="text" placeholder="PLZ ...">
+                </div>
+                <div class="w3-half">
+                    <label>Kontakt: öffentlich</label>
+                    <input class="w3-input w3-border" type="text" placeholder="Meine Email, Telephonnummer etc. ...">
+
+                </div>
+
+
+
+                <h4>Optionale Angaben</h4>
+                <div class="w3-half">
+                    <label>System</label>
+                    <input class="w3-input w3-border" type="text" placeholder="Hier Dropdown ...">
+                </div>
+                <div class="w3-half">
+                    <label>Adresse</label>
+                    <input class="w3-input w3-border" type="text" placeholder="Strasse, Hausnummer ...">
+                </div>
+                <div class="w3-half">
+                    <label>Termin</label>
+                    <input class="w3-input w3-border" type="text" placeholder="DD.MM.YYYY ...">
+                </div>
+                <div class="w3-half">
+                    <label>Zeit</label>
+                    <input class="w3-input w3-border" type="text" placeholder="HH.MM ...">
+                </div>
+
+
+            <p><button class="w3-button w3-dark-grey">Erstellen</button></p>
+        </div>
+
+       </div>
+
+
+    </div>
+
+
+
+<script>
+    // Tabs
+    function openLink(evt, linkName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("myLink");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+        }
+        document.getElementById(linkName).style.display = "block";
+        evt.currentTarget.className += " w3-red";
+    }
+    // Click on the first tablink on load
+    document.getElementsByClassName("tablink")[0].click();
+</script>
+
+</body>
+</html>
