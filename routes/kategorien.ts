@@ -4,12 +4,17 @@ import {Kategorie} from "../models/Kategorie";
 
 export const kategorien = Router();
 
+// TODO
+let header = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'};
 
 // Alle vorhandenen Kategorie abfragen
 kategorien.get("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
-        res.json(await Kategorie.findAll());
+        // TODO for every route
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
+        res.json(await Kategorie.findAll());
     } catch (e) {
         next(e);
     }
