@@ -31,3 +31,28 @@
     <label>Kontakt</label>
     <input class="w3-input w3-border" type="text" placeholder="Meine Email, Telephonnummer etc. ...">
 </div>
+
+
+// fills the dropdown with systems from the server
+$(document).ready( () => {
+$.ajax({
+type: "GET",
+url: "http://localhost:3000/systeme/",
+success: (data) => {
+var systeme = data;//jQuery.parseJSON(data);
+console.log(data);
+var dropdown = $('#sys-dropdown-suchen');
+
+dropdown.html('');
+dropdown.append('\'<option value="">System auswählen</option>\'');
+
+if (systeme != '') {
+$.each(systeme, (k, v) => {
+dropdown.append('<option value="' + v.id + '">' + v.name + '</option>');
+}
+)
+}
+}
+})
+//});
+});
