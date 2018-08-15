@@ -9,11 +9,14 @@ let header = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin'
 // Alle vorhandenen Kategorie abfragen
 kategorien.get("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
+
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
         res.json(await Kategorie.findAll());
 
+
+        res.json(await Kategorie.findAll());
     } catch (e) {
         next(e);
     }
