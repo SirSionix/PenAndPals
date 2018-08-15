@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="pandp.css">
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!--TODO lokal!-->
+<script language='javascript' type='text/javascript' charset="utf-8" src='index.js'></script>
 <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <style>
@@ -35,22 +36,22 @@
             <div class="w3-row-padding" style="margin:0 -16px;">
                 <div class="w3-half">
                     <label>Name</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Mein Benutzername ...">
+                    <input class="w3-input w3-border" id="BenutzernameInputReg" type="text" placeholder="Mein Benutzername ...">
                 </div>
                 <div class="w3-half">
                     <label>Email</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Meine Email Adresse ...">
+                    <input class="w3-input w3-border" id="EmailInputReg" type="text" placeholder="Meine Email Adresse ...">
                 </div>
                 <div class="w3-half">
                     <label>Passwort</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Mein Passwort ...">
+                    <input class="w3-input w3-border" id="PassInputReg" type="text" placeholder="Mein Passwort ...">
                 </div>
                 <div class="w3-half">
                     <label>Passwort bestätigen</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Mein Passwort ...">
+                    <input class="w3-input w3-border" id="PassCheckInputReg" type="text" placeholder="Mein Passwort ...">
                 </div>
             </div>
-            <p><button class="w3-button w3-dark-grey">los</button></p>
+            <p><button class="w3-button w3-dark-grey" id="BenutzerAnlegenBtn">los</button></p>
         </div>
 
         <div id="Anmelden" class="w3-container w3-white w3-padding-16 myLink">
@@ -58,11 +59,11 @@
             <div class="w3-row-padding" style="margin:0 -16px;">
                 <div class="w3-half">
                     <label>Name</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Mein Benutzername ...">
+                    <input class="w3-input w3-border" id="BenutzernameInputLog" type="text" placeholder="Mein Benutzername ...">
                 </div>
                 <div class="w3-half">
                     <label>Passwort</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Mein Passwort ...">
+                    <input class="w3-input w3-border" id="PassInputLog" type="text" placeholder="Mein Passwort ...">
                 </div>
             </div>
             <p><button class="w3-button w3-dark-grey">los</button></p>

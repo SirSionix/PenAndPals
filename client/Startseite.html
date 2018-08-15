@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="pandp.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <!--TODO lokal!-->
 <script language='javascript' type='text/javascript' charset="utf-8" src='index.js'></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -36,7 +36,7 @@
         <div class="w3-row-padding" style="margin:0 -16px;">
             <div class="w3-half">
                 <label>Ort</label>
-                <input class="w3-input w3-border" type="text" placeholder="Wo ...">
+                <input class="w3-input w3-border" id="OrtInputTF" type="text" placeholder="Wo ...">
             </div>
             <div class="w3-half">
                 <label>Kategorie</label>
@@ -52,23 +52,23 @@
 
                 <div class="w3-half">
                     <label>Name</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Eventname ...">
+                    <input class="w3-input w3-border" id="NameInputTA" type="text" placeholder="Eventname ...">
                 </div>
                 <div class="w3-half">
                     <label>Kategorie</label>
-                    <select class="w3-input w3-border" id="kat-dropdown-anlegen" name="kat"></select>
+                    <select class="w3-input w3-border" id="KatInputTA" id="kat-dropdown-anlegen" name="kat"></select>
                 </div>
                 <div class="w3-half">
                     <label>Ort</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Wo ...">
+                    <input class="w3-input w3-border" id="OrtInputTA" type="text" placeholder="Wo ...">
                 </div>
                 <div class="w3-half">
                     <label>PLZ</label>
-                    <input class="w3-input w3-border" type="text" placeholder="PLZ ...">
+                    <input class="w3-input w3-border" id="PLZInputTA" type="text" placeholder="PLZ ...">
                 </div>
                 <div class="w3-half">
                     <label>Kontakt: öffentlich</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Meine Email, Telephonnummer etc. ...">
+                    <input class="w3-input w3-border" id="KontaktInputTA" type="text" placeholder="Meine Email, Telephonnummer etc. ...">
 
                 </div>
 
