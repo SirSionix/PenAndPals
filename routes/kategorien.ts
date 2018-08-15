@@ -4,15 +4,17 @@ import {Kategorie} from "../models/Kategorie";
 
 export const kategorien = Router();
 
-// TODO
 let header = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'};
 
 // Alle vorhandenen Kategorie abfragen
 kategorien.get("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
-        // TODO for every route
+
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+        res.json(await Kategorie.findAll());
+
 
         res.json(await Kategorie.findAll());
     } catch (e) {
@@ -23,6 +25,9 @@ kategorien.get("/", async (req: Request, res: Response, next: NextFunction) => {
 // Neuen Kategorie erstellen nach der Definition in "Kategorie.ts"
 kategorien.post("/new", async (req: Request, res: Response, next: NextFunction) => {
     try {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
         let kategorie : Kategorie = await Kategorie.create(req.body);
         res.status(201).json(kategorie);
     } catch (e) {
@@ -35,6 +40,9 @@ kategorien.delete("/:id", async (req: Request, res: Response, next: NextFunction
     let id = req.params['id'];
 
     try {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
         let  kategorie : Kategorie = await Kategorie.find(id);
         await Kategorie.destroy({
             where: {
