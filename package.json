@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "prestart": "tsc server.ts",
-    "start": "node server.js"
+    "prestart": "tsc server/server.ts",
+    "start": "node server/server.js"
   },
   "name": "penandpals",
   "version": "1.0.0",
