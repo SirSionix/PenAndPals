@@ -7,6 +7,9 @@ import {events} from "./routes/events";
 import {kategorien} from "./routes/kategorien";
 import {systeme} from "./routes/systeme";
 
+// später entfernen
+import {Kategorie} from "./models/Kategorie";
+
 export const app = express();
 
 
@@ -15,8 +18,20 @@ app.use(bodyParser.json({limit: '5mb'}));
 
 app.use('/users', users);
 app.use('/events', events);
-app.use('/kategorien',kategorien);
+app.use('/kategorien', kategorien);
 app.use('/systeme', systeme);
+
+// Beispieldaten einfügen
+/*(async () => {
+    try {
+        await Kategorie.create({
+            name: "Larp",
+            beschreibung: "Life Action Roleplay"
+        });
+    } catch (e) {
+
+    }
+})(); */
 
 //Server wird gestartet
 (async () => {
@@ -27,3 +42,5 @@ app.use('/systeme', systeme);
             console.log("My API is running...");
         })
 })();
+
+
