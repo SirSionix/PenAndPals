@@ -18,14 +18,14 @@ export class Event extends Model<Event> {
 
     @ForeignKey(()=> Kategorie)
     @Column
-    kategorieID: string;
+    kategorieName: string;
 
     @BelongsTo(()=> Kategorie)
     kategorie : Kategorie;
 
     @ForeignKey(()=> System)
     @Column
-    systemID: string;
+    systemName: string;
 
     @BelongsTo(()=> System)
     system : System;

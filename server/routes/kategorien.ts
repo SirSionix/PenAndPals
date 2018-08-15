@@ -14,9 +14,6 @@ kategorien.get("/", async (req: Request, res: Response, next: NextFunction) => {
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
         res.json(await Kategorie.findAll());
-
-
-        res.json(await Kategorie.findAll());
     } catch (e) {
         next(e);
     }

@@ -19,28 +19,17 @@ events.get("/", async (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
-events.get("/src/:plz-:ortsname-:kategorieID-:systemID", async (req: Request, res: Response, next: NextFunction) => {
-    let plz: string = req.params['plz'];
-    let ortsname = req.params['ortsname'];
-    let kategorieID = req.params['kategorieID'];
-    let systemID = req.params['systemID'];
+events.get("/src", async (req: Request, res: Response, next: NextFunction) => {
 
     try {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
 
+        console.log(req.query);
 
-
-        console.log(plz + "/ " + ortsname + "/ " + kategorieID + "/ " + systemID);
-        console.log(plz[0] + plz[1])
         res.json(await Event.findAll({
-            where:{
-                plzshort: (plz[0]+plz[1]),
-                ortsname: ortsname,
-                kategorieID: kategorieID,
-                systemID: systemID
-            }
+            where: req.query
         }));
 
     } catch (e) {
