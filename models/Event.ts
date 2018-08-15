@@ -29,4 +29,7 @@ export class Event extends Model<Event> {
 
     @BelongsTo(()=> System)
     system : System;
+
+    @Column
+    plzshort: string;
 }
