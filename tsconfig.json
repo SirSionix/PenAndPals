@@ -4,6 +4,7 @@
     "target": "es6",
     "sourceMap": true,
     "lib": [ "es2015" ],
+    "rootDir": "server",
 
     // for sequelize-typescript
     "experimentalDecorators": true,
