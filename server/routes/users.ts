@@ -1,6 +1,7 @@
 import {NextFunction, Router} from "express";
 import {Request, Response} from "express";
 import {User} from "../models/User";
+import {sequelize} from "../sequelize";
 
 export const users = Router();
 
@@ -30,6 +31,7 @@ users.post("/new", async (req: Request, res: Response, next: NextFunction) => {
    } catch (e) {
        next(e);
    }
+    await sequelize.sync(/*{force: true}*/);
 });
 
 //User wird anhand der ID gelöscht
@@ -50,5 +52,5 @@ users.delete("/:id", async (req: Request, res: Response, next: NextFunction) => 
    } catch (e) {
        next (e);
    }
-
+    await sequelize.sync(/*{force: true}*/);
 });
