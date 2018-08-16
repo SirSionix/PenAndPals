@@ -155,3 +155,4 @@ fabric.properties
 
 *.js
 *.js.map
+!client/index.js
