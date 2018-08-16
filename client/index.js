@@ -82,8 +82,35 @@ $(document).ready(() => {
                 "password": $('#PassInputReg').val()
             },
             dataType: 'json',
-            //TODO now fucking what
         });
     })
+
+// Event anlegen
+    $('#EventAnlegenBtn').click(() => {
+
+        var name = $('#NameInputTA').val();
+        var name2 = $('#kat-dropdown-anlegen :selected').text();
+
+        console.log(name); //# TODO remove
+        console.log(name2); //# TODO remove
+
+        //  if (name != '' &&   ||   ) { //TODO check for all fields being filled out
+
+        $.ajax({
+            url: 'http://localhost:3000/events/new',
+            type: 'POST',
+            data: {
+                "name": $('#NameInputTA').val(),
+                "plz": $('#PLZInputTA').val(),
+                "ortsname": $('#OrtInputTA').val(),
+                "kontaktweg": $('#KontaktInputTA').val(),
+                "kategorieName": $('#kat-dropdown-anlegen :selected').text(),
+                "systemName": $('#sys-dropdown-anlegen :selected').text()
+
+            },
+            dataType: 'json',
+        });
+    })
+
 
 })
