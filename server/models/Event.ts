@@ -1,6 +1,7 @@
-import {BelongsTo, Column, ForeignKey, Model, Table} from "sequelize-typescript";
+import {BelongsTo, Column, CreatedAt, ForeignKey, Model, Table} from "sequelize-typescript";
 import {Kategorie} from "./Kategorie"
 import {System} from "./System";
+import * as sequelize from "sequelize";
 
 @Table
 export class Event extends Model<Event> {
@@ -14,7 +15,13 @@ export class Event extends Model<Event> {
     ortsname : string;
 
     @Column
+    straße: string;
+
+    @Column
     kontaktweg : string;
+
+    @Column
+    beschreibung: string;
 
     @ForeignKey(()=> Kategorie)
     @Column
@@ -29,6 +36,9 @@ export class Event extends Model<Event> {
 
     @BelongsTo(()=> System)
     system : System;
+
+    @Column
+    datum: Date;
 
     @Column
     plzshort: string;

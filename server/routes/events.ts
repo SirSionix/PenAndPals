@@ -1,6 +1,7 @@
 import {json, NextFunction, Router} from "express";
 import {Request, Response} from "express";
 import {Event} from "../models/Event";
+import {sequelize} from "../sequelize";
 
 export const events = Router();
 
@@ -26,8 +27,6 @@ events.get("/src", async (req: Request, res: Response, next: NextFunction) => {
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
 
-        console.log(req.query);
-
         res.json(await Event.findAll({
             where: req.query
         }));
@@ -50,6 +49,7 @@ events.post("/new", async (req: Request, res: Response, next: NextFunction) => {
     } catch (e) {
         next(e);
     }
+    await sequelize.sync(/*{force: true}*/);
 });
 
 //Event wird anhand der ID gelöscht
@@ -70,5 +70,5 @@ events.delete("/:id", async (req: Request, res: Response, next: NextFunction) =>
     } catch (e) {
         next (e);
     }
-
+    await sequelize.sync(/*{force: true}*/);
 });

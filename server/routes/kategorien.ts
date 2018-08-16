@@ -1,6 +1,7 @@
 import {NextFunction, Router} from "express";
 import {Request, Response} from "express";
 import {Kategorie} from "../models/Kategorie";
+import {sequelize} from "../sequelize";
 
 export const kategorien = Router();
 
@@ -30,6 +31,7 @@ kategorien.post("/new", async (req: Request, res: Response, next: NextFunction) 
     } catch (e) {
         next(e);
     }
+    await sequelize.sync(/*{force: true}*/);
 });
 
 //Kategorie wird anhand der ID gelöscht
@@ -50,5 +52,5 @@ kategorien.delete("/:id", async (req: Request, res: Response, next: NextFunction
     } catch (e) {
         next (e);
     }
-
+    await sequelize.sync(/*{force: true}*/);
 });

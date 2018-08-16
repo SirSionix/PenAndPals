@@ -1,6 +1,7 @@
 import {NextFunction, Router} from "express";
 import {Request, Response} from "express";
 import {System} from "../models/System";
+import {sequelize} from "../sequelize";
 
 export const systeme = Router();
 
@@ -17,6 +18,7 @@ systeme.get("/", async (req: Request, res: Response, next: NextFunction) => {
     } catch (e) {
         next(e);
     }
+
 });
 
 // Neuen System erstellen nach der Definition in "System.ts"
@@ -30,6 +32,7 @@ systeme.post("/new", async (req: Request, res: Response, next: NextFunction) => 
     } catch (e) {
         next(e);
     }
+    await sequelize.sync(/*{force: true}*/);
 });
 
 //System wird anhand der ID gelöscht
@@ -50,5 +53,5 @@ systeme.delete("/:id", async (req: Request, res: Response, next: NextFunction) =
     } catch (e) {
         next (e);
     }
-
+    await sequelize.sync(/*{force: true}*/);
 });

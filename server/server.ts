@@ -35,11 +35,19 @@ app.use('/systeme', systeme);
 
 //Server wird gestartet
 (async () => {
-    await sequelize.sync({force: true});
+    await sequelize.sync(/*{force: true}*/);
 
     createServer(app)
         .listen(3000, () => {
             console.log("My API is running...");
+            sequelize
+                .authenticate()
+                .then(() => {
+                    console.log('Connection has been established successfully.');
+                })
+                .catch(err => {
+                    console.error('Unable to connect to the database:', err);
+                });
         })
 })();
 
