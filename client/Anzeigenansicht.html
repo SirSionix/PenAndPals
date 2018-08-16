@@ -21,21 +21,6 @@
 
 </header>
 
-
-  <!--  <table class="w3-table" id='Eventausgabe'>
-        <tr>
-            <th>Eventname</th>
-            <th>Ort</th>
-            <th>PLZ</th>
-            <th>Adresse</th>
-            <th>Kategorie</th>
-            <th>System</th>
-            <th>Termin</th>
-            <th>Zeit</th>
-            <th>Kontakt</th>
-        </tr>
-    </table> -->
-
     <body class="w3-display-container w3-content" style="max-width:1500px">
     <img class="w3-image w3-hide-small" src="ttgamepicture.jpg" width="auto" height="auto">
     <div class="w3-display-middle" style="position:absolute; top:100px; width:80%;">
@@ -43,55 +28,27 @@
 
             <button class="w3-bar-item tablink" onclick="openLink(event, 'TreffenAnzeigen');">Events</button>
         </div>
-        <!-- Tabs -->
 
         <div id="TreffenAnzeigen" class="w3-container w3-white w3-padding-16 myLink">
             <div class="w3-row-padding" style="margin:0 -16px;">
                 <div class="w3-half">
                     <label>Name</label>
-                    <input class="w3-input w3-border" id="NameInputTA" type="text" placeholder="Eventname ...">
+                    <span class="w3-input w3-border" id="NameOutput" type="text"></span>
                 </div>
                 <div class="w3-half">
                     <label>Kategorie</label>
-                    <select class="w3-input w3-border" id="kat-dropdown-anlegen"></select>
+                    <span class="w3-input w3-border" id="KatOutput"></span>
                 </div>
                 <div class="w3-half">
                     <label>Ort</label>
-                    <input class="w3-input w3-border" id="OrtInputTA" type="text" placeholder="Wo ...">
+                    <span class="w3-input w3-border" id="OrtOutput" type="text"></span>
                 </div>
                 <div class="w3-half">
                     <label>PLZ</label>
-                    <input class="w3-input w3-border" id="PLZInputTA" type="text" placeholder="PLZ ...">
-                </div>
-                <div class="w3-half">
-                    <label>Kontakt: öffentlich</label>
-                    <input class="w3-input w3-border" id="KontaktInputTA" type="text" placeholder="Meine Email, Telephonnummer etc. ...">
-                </div>
-                <div class="w3-half">
-                    <label>System</label>
-                    <select class="w3-input w3-border" id="sys-dropdown-anlegen" name="kat"></select>
-                </div>
-                <div class="w3-half">
-                    <label>Adresse</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Strasse, Hausnummer ...">
-                </div>
-                <div class="w3-half">
-                    <label>Termin</label>
-                    <input class="w3-input w3-border" type="text" placeholder="DD.MM.YYYY ...">
-                </div>
-                <div class="w3-half">
-                    <label>Zeit</label>
-                    <input class="w3-input w3-border" type="text" placeholder="HH.MM ...">
-                </div>
-                <div class="w3-half">
-                    <label>Beschreibung</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Beschreibung ...">
+                    <span class="w3-input w3-border" id="PLZOutput" type="text"></span>
                 </div>
             </div>
-
         </div>
-
-
     </div>
 
 

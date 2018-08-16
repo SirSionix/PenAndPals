@@ -111,6 +111,26 @@ $(document).ready(() => {
             dataType: 'json',
         });
     })
+// writes the events
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:3000/events/",
+        success: (data) => {
+            var eingabe = data;//jQuery.parseJSON(data);
+            console.log(data);
+            var liste = $('#TreffenAnzeigen');
 
+           // dropdown.html('');
+         //   liste.append('\'<option value="">Kategorie auswählen</option>\'');
+
+            if (eingabe != '') {
+                $.each(eingabe, (k, v) => {
+                    liste.append('<option value="' + v.id + '">' + v.name + '</option>');
+                     //   dropdown.append('<option value="' + v.id + '">' + v.name + '</option>');
+                    }
+                )
+            }
+        }
+    });
 
 })
