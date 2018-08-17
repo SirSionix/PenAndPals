@@ -97,6 +97,7 @@ $(document).ready(() => {
         //  if (name != '' &&   ||   ) { //TODO check for all fields being filled out
 
         $.ajax({
+
             url: 'http://localhost:3000/events/new',
             type: 'POST',
             data: {
@@ -125,7 +126,13 @@ $(document).ready(() => {
 
             if (eingabe != '') {
                 $.each(eingabe, (k, v) => {
-                    liste.append('<option value="' + v.id + '">' + v.name + '</option>');
+                    liste.append('<p value="' + v.id + '">' + "-----" + '</p>');
+                    liste.append('<p value="' + v.id + '">' + v.name + '</p>');
+                    liste.append('<p value="' + v.id + '">' + v.kategorieName + '</p>');
+                    liste.append('<p value="' + v.id + '">' + v.ortsname + '</p>');
+                    liste.append('<p value="' + v.id + '">' + v.plz + '</p>');
+                    liste.append('<p value="' + v.id + '">' + v.kontaktweg + '</p>');
+
                      //   dropdown.append('<option value="' + v.id + '">' + v.name + '</option>');
                     }
                 )
