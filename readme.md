@@ -1,5 +1,8 @@
-how to start server
+#Run
 
-npm install  
-npm run build  
-npm start
+`npm install`
+
+ 
+`npm start`
+
+
