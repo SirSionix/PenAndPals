@@ -46,7 +46,7 @@ systeme.delete("/:id", async (req: Request, res: Response, next: NextFunction) =
         let  system : System = await System.find(id);
         await System.destroy({
             where: {
-                id: id
+                name: id
             }
         });
         res.status (200).json(system)
