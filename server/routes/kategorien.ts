@@ -45,7 +45,7 @@ kategorien.delete("/:id", async (req: Request, res: Response, next: NextFunction
         let  kategorie : Kategorie = await Kategorie.find(id);
         await Kategorie.destroy({
             where: {
-                id: id
+                name: id
             }
         });
         res.status (200).json(kategorie)
