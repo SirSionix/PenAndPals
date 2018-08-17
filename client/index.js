@@ -89,29 +89,34 @@ $(document).ready(() => {
     $('#EventAnlegenBtn').click(() => {
 
         var name = $('#NameInputTA').val();
-        var name2 = $('#kat-dropdown-anlegen :selected').text();
+        var kat = $('#kat-dropdown-anlegen :selected').text();
+        var ort = $('#OrtInputTA').val();
+        var kontakt = $('#KontaktInputTA').val();
+        var plz = $('#PLZInputTA').val();
+        var sys = $('#sys-dropdown-anlegen :selected').text();
 
-        console.log(name); //# TODO remove
-        console.log(name2); //# TODO remove
 
-        //  if (name != '' &&   ||   ) { //TODO check for all fields being filled out
+          if (name != '' && kat != '' && ort != '' && kontakt != '' && plz != '' && sys != '') { //TODO check for all fields being filled out
 
-        $.ajax({
+              $.ajax({
 
-            url: 'http://localhost:3000/events/new',
-            type: 'POST',
-            data: {
-                "name": $('#NameInputTA').val(),
-                "plz": $('#PLZInputTA').val(),
-                "ortsname": $('#OrtInputTA').val(),
-                "kontaktweg": $('#KontaktInputTA').val(),
-                "kategorieName": $('#kat-dropdown-anlegen :selected').text(),
-                "systemName": $('#sys-dropdown-anlegen :selected').text()
+                  url: 'http://localhost:3000/events/new',
+                  type: 'POST',
+                  data: {
+                      "name": $('#NameInputTA').val(),
+                      "plz": $('#PLZInputTA').val(),
+                      "ortsname": $('#OrtInputTA').val(),
+                      "kontaktweg": $('#KontaktInputTA').val(),
+                      "kategorieName": $('#kat-dropdown-anlegen :selected').text(),
+                      "systemName": $('#sys-dropdown-anlegen :selected').text(),
+                      "beschreibung": $('#BeschreibungAnlegen').val()
 
-            },
-            dataType: 'json',
-        });
+                  },
+                  dataType: 'json',
+              });
+          }
     })
+
 // writes the events
     $.ajax({
         type: "GET",
@@ -132,8 +137,7 @@ $(document).ready(() => {
                     liste.append('<p value="' + v.id + '">' + v.ortsname + '</p>');
                     liste.append('<p value="' + v.id + '">' + v.plz + '</p>');
                     liste.append('<p value="' + v.id + '">' + v.kontaktweg + '</p>');
-
-                     //   dropdown.append('<option value="' + v.id + '">' + v.name + '</option>');
+                  //  liste.append('<button class="w3-button w3-dark-grey" id="EventAnzeigen">' "Anzeigen" '</button>');
                     }
                 )
             }
