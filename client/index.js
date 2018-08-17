@@ -96,7 +96,7 @@ $(document).ready(() => {
         var sys = $('#sys-dropdown-anlegen :selected').text();
 
 
-          if (name != '' && kat != '' && ort != '' && kontakt != '' && plz != '' && sys != '') { //TODO check for all fields being filled out
+          if (name != '' && kat != '' && kontakt != '' && plz != '' && sys != '') {
 
               $.ajax({
 
