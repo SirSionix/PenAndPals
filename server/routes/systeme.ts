@@ -32,7 +32,7 @@ systeme.post("/new", async (req: Request, res: Response, next: NextFunction) => 
     } catch (e) {
         next(e);
     }
-    await sequelize.sync(/*{force: true}*/);
+    // await sequelize.sync(/*{force: true}*/);
 });
 
 //System wird anhand der ID gelöscht
@@ -53,5 +53,5 @@ systeme.delete("/:id", async (req: Request, res: Response, next: NextFunction) =
     } catch (e) {
         next (e);
     }
-    await sequelize.sync(/*{force: true}*/);
+    // await sequelize.sync(/*{force: true}*/);
 });

@@ -31,7 +31,7 @@ users.post("/new", async (req: Request, res: Response, next: NextFunction) => {
    } catch (e) {
        next(e);
    }
-    await sequelize.sync(/*{force: true}*/);
+    //await sequelize.sync(/*{force: true}*/);
 });
 
 //User wird anhand der ID gelöscht
@@ -52,5 +52,5 @@ users.delete("/:id", async (req: Request, res: Response, next: NextFunction) => 
    } catch (e) {
        next (e);
    }
-    await sequelize.sync(/*{force: true}*/);
+   // await sequelize.sync(/*{force: true}*/);
 });
