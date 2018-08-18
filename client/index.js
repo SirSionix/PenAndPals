@@ -64,6 +64,27 @@ $(document).ready(() => {
         }
     });
 
+    // fills the dropdown with systems from the server
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:3000/systeme/",
+        success: (data) => {
+            var systeme = data;//jQuery.parseJSON(data);
+            console.log(data);
+            var dropdown = $('#sys-dropdown-suchen');
+
+            dropdown.html('');
+            dropdown.append('\'<option value="">System auswählen</option>\'');
+
+            if (systeme != '') {
+                $.each(systeme, (k, v) => {
+                        dropdown.append('<option value="' + v.id + '">' + v.name + '</option>');
+                    }
+                )
+            }
+        }
+    });
+
 // Benutzer anlegen
     $('#BenutzerAnlegenBtn').click(() => {
 
@@ -118,30 +139,39 @@ $(document).ready(() => {
     })
 
 // writes the events
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:3000/events/",
-        success: (data) => {
-            var eingabe = data;//jQuery.parseJSON(data);
-            console.log(data);
-            var liste = $('#TreffenAnzeigen');
+  //  var suchurl = 'http://localhost:3000/events/';
 
-           // dropdown.html('');
-         //   liste.append('\'<option value="">Kategorie auswählen</option>\'');
+    $('#EventSuchenBtn').click(() => {
+        $.ajax({
 
-            if (eingabe != '') {
-                $.each(eingabe, (k, v) => {
-                    liste.append('<p value="' + v.id + '">' + "-----" + '</p>');
-                    liste.append('<p value="' + v.id + '">' + v.name + '</p>');
-                    liste.append('<p value="' + v.id + '">' + v.kategorieName + '</p>');
-                    liste.append('<p value="' + v.id + '">' + v.ortsname + '</p>');
-                    liste.append('<p value="' + v.id + '">' + v.plz + '</p>');
-                    liste.append('<p value="' + v.id + '">' + v.kontaktweg + '</p>');
-                  //  liste.append('<button class="w3-button w3-dark-grey" id="EventAnzeigen">' "Anzeigen" '</button>');
-                    }
-                )
+            url: "http://localhost:3000/events/",
+            type: "GET",
+            header:'Access-Control-Request-Headers: x-requested-with',
+            xhrFields: {
+                withCredentials: true
+            },
+            success: (data) => {
+                var eingabe = data;//jQuery.parseJSON(data);
+                console.log(data);
+                var liste = $('#TreffenAnzeigen');
+
+                // dropdown.html('');
+                //   liste.append('\'<option value="">Kategorie auswählen</option>\'');
+
+                if (eingabe != '') {
+                    $.each(eingabe, (k, v) => {
+                            liste.append('<p value="' + v.id + '">' + "-----" + '</p>');
+                            liste.append('<p value="' + v.id + '">' + v.name + '</p>');
+                            liste.append('<p value="' + v.id + '">' + v.kategorieName + '</p>');
+                            liste.append('<p value="' + v.id + '">' + v.ortsname + '</p>');
+                            liste.append('<p value="' + v.id + '">' + v.plz + '</p>');
+                            liste.append('<p value="' + v.id + '">' + v.kontaktweg + '</p>');
+                            //  liste.append('<button class="w3-button w3-dark-grey" id="EventAnzeigen">' "Anzeigen" '</button>');
+                        }
+                    )
+                }
             }
-        }
-    });
-
+        });
+        window.location.href = 'Anzeigenansicht.html';
+    })
 })

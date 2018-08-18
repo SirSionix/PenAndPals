@@ -35,10 +35,6 @@
         <div id="Treffen finden" class="w3-container w3-white w3-padding-16 myLink">
         <div class="w3-row-padding" style="margin:0 -16px;">
             <div class="w3-half">
-                <label>Ort</label>
-                <input class="w3-input w3-border" id="OrtInputTF" type="text" placeholder="Wo ...">
-            </div>
-            <div class="w3-half">
                 <label>PLZ</label>
                 <input class="w3-input w3-border" id="PLZInputTF" type="text" placeholder="PLZ ...">
             </div>
@@ -46,8 +42,12 @@
                 <label>Kategorie</label>
                 <select class="w3-input w3-border" id="kat-dropdown-suchen"></select>
             </div>
+            <div class="w3-half">
+                <label>System</label>
+                <select class="w3-input w3-border" id="sys-dropdown-suchen"></select>
+            </div>
         </div>
-        <p><button class="w3-button w3-dark-grey"onclick="self.location.href='Anzeigenansicht.html'">Finden</button></p>
+        <p><button class="w3-button w3-dark-grey" id="EventSuchenBtn">Finden</button></p>
         </div>
 
         <div id="Treffen anlegen" class="w3-container w3-white w3-padding-16 myLink">
