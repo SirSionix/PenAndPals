@@ -139,9 +139,8 @@ $(document).ready(() => {
     });
 
 // writes the events
-  //  var suchurl = 'http://localhost:3000/events/';
 
-    $('#EventSuchenBtn').click(() => {
+/*    $('#EventSuchenBtn').click(() => {
         $.ajax({
 
             url: "http://localhost:3000/events",
@@ -174,5 +173,50 @@ $(document).ready(() => {
             }
         });
 
+    });    */
+
+    $('#EventSuchenBtn').click(() => {
+
+        var kat = $('#kat-dropdown-suchen :selected').text();
+        var plz = $('#PLZInputTF').val();
+        var sys = $('#sys-dropdown-suchen :selected').text();
+        var query = {};
+
+        if (kat != '' && kat != 'Kategorie auswählen')
+            query.kategorieName = kat;
+
+        if (plz != '')
+            query.plzshort = plz;
+
+        if (sys != '' && sys != 'System auswählen')
+            query.systemName = sys;
+
+        var queryString = $.param(query);
+
+        $.ajax({
+
+            url: "http://localhost:3000/events/src" + '?' + queryString,
+            type: "GET",
+            success: (data) => {
+                var eingabe = data;//jQuery.parseJSON(data);
+                console.log(data);
+                var liste = $('#results');
+
+                if (eingabe != '') {
+                    $.each(eingabe, (k, v) => {
+                            liste.append('<hr>');
+                            liste.append('<p value="' + v.id + '">' + v.name + '</p>');
+                            liste.append('<p value="' + v.id + '">' + v.kategorieName + '</p>');
+                            liste.append('<p value="' + v.id + '">' + v.ortsname + '</p>');
+                            liste.append('<p value="' + v.id + '">' + v.plz + '</p>');
+                            liste.append('<p value="' + v.id + '">' + v.kontaktweg + '</p>');
+                            //  liste.append('<button class="w3-button w3-dark-grey" id="EventAnzeigen">' "Anzeigen" '</button>');
+                        }
+                    )
+                }
+                // window.location.href = 'Anzeigenansicht.html';
+            }
+        });
+
     })
-})
+});
