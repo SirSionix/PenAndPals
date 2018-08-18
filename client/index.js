@@ -186,12 +186,15 @@ $(document).ready(() => {
             query.kategorieName = kat;
 
         if (plz != '')
-            query.plzshort = plz;
+            query.plzshort = plz.substring(0,2);
 
         if (sys != '' && sys != 'System auswählen')
             query.systemName = sys;
 
         var queryString = $.param(query);
+
+
+        $('#results').children().remove();
 
         $.ajax({
 
@@ -204,13 +207,14 @@ $(document).ready(() => {
 
                 if (eingabe != '') {
                     $.each(eingabe, (k, v) => {
-                            liste.append('<hr>');
-                            liste.append('<p value="' + v.id + '">' + v.name + '</p>');
-                            liste.append('<p value="' + v.id + '">' + v.kategorieName + '</p>');
-                            liste.append('<p value="' + v.id + '">' + v.ortsname + '</p>');
-                            liste.append('<p value="' + v.id + '">' + v.plz + '</p>');
-                            liste.append('<p value="' + v.id + '">' + v.kontaktweg + '</p>');
-                            //  liste.append('<button class="w3-button w3-dark-grey" id="EventAnzeigen">' "Anzeigen" '</button>');
+                        $('<div>').addClass('result').append(
+                                $('<hr>'),
+                                $('<p>').text(v.name),
+                                $('<p>').text(v.kategorieName),
+                                $('<p>').text(v.ortsname),
+                                $('<p>').text(v.plz),
+                                $('<p>').text(v.kontaktweg)
+                            ).appendTo(liste);
                         }
                     )
                 }
