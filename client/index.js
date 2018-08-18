@@ -104,7 +104,7 @@ $(document).ready(() => {
             },
             dataType: 'json',
         });
-    })
+    });
 
 // Event anlegen
     $('#EventAnlegenBtn').click(() => {
@@ -136,7 +136,7 @@ $(document).ready(() => {
                   dataType: 'json',
               });
           }
-    })
+    });
 
 // writes the events
   //  var suchurl = 'http://localhost:3000/events/';
@@ -144,16 +144,16 @@ $(document).ready(() => {
     $('#EventSuchenBtn').click(() => {
         $.ajax({
 
-            url: "http://localhost:3000/events/",
+            url: "http://localhost:3000/events",
             type: "GET",
-            header:'Access-Control-Request-Headers: x-requested-with',
-            xhrFields: {
-                withCredentials: true
-            },
+       //     header:'Access-Control-Request-Headers: x-requested-with',
+         //   xhrFields: {
+           //     withCredentials: true
+            //},
             success: (data) => {
                 var eingabe = data;//jQuery.parseJSON(data);
                 console.log(data);
-                var liste = $('#TreffenAnzeigen');
+                var liste = $('#results');
 
                 // dropdown.html('');
                 //   liste.append('\'<option value="">Kategorie auswählen</option>\'');
@@ -170,8 +170,9 @@ $(document).ready(() => {
                         }
                     )
                 }
+               // window.location.href = 'Anzeigenansicht.html';
             }
         });
-        window.location.href = 'Anzeigenansicht.html';
+
     })
 })
