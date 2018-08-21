@@ -4,7 +4,7 @@ $(document).ready(() => {
     // fills the dropdown with katagories from the server
     $.ajax({
         type: "GET",
-        url: "http://localhost:3000/kategorien/",
+        url: "/kategorien/",
         success: (data) => {
             var kategorien = data;//jQuery.parseJSON(data);
             console.log(data);
@@ -25,7 +25,7 @@ $(document).ready(() => {
 // fills the dropdown with katagories from the server
     $.ajax({
         type: "GET",
-        url: "http://localhost:3000/kategorien/",
+        url: "/kategorien/",
         success: (data) => {
             var kategorien = data;//jQuery.parseJSON(data);
             console.log(data);
@@ -46,7 +46,7 @@ $(document).ready(() => {
 // fills the dropdown with systems from the server
     $.ajax({
         type: "GET",
-        url: "http://localhost:3000/systeme/",
+        url: "/systeme/",
         success: (data) => {
             var systeme = data;//jQuery.parseJSON(data);
             console.log(data);
@@ -67,7 +67,7 @@ $(document).ready(() => {
     // fills the dropdown with systems from the server
     $.ajax({
         type: "GET",
-        url: "http://localhost:3000/systeme/",
+        url: "/systeme/",
         success: (data) => {
             var systeme = data;//jQuery.parseJSON(data);
             console.log(data);
@@ -95,7 +95,7 @@ $(document).ready(() => {
         //  if (name != '' &&   ||   ) { //TODO check for all fields being filled out
 
         $.ajax({
-            url: 'http://localhost:3000/users/new',
+            url: '/users/new',
             type: 'POST',
             data: {
                 "name": $('#BenutzernameInputReg').val(),
@@ -121,7 +121,7 @@ $(document).ready(() => {
 
               $.ajax({
 
-                  url: 'http://localhost:3000/events/new',
+                  url: '/events/new',
                   type: 'POST',
                   data: {
                       "name": $('#NameInputTA').val(),
@@ -162,7 +162,7 @@ $(document).ready(() => {
 
         $.ajax({
 
-            url: "http://localhost:3000/events/src" + '?' + queryString,
+            url: "/events/src" + '?' + queryString,
             type: "GET",
             success: (data) => {
                 var eingabe = data;//jQuery.parseJSON(data);
