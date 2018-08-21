@@ -1,17 +1,17 @@
-#Pens and Pals
+# Pens and Pals
 
-##Requirements
+## Requirements
     node >= 10.3.0
 
-##Run
+## Run
     npm install
     npm start
     
-##Dokumentation
+## Dokumentation
 
-###Server
+### Server
 
-####Used Modules:
+#### Used Modules:
 
         "@types/body-parser": "*",
         "@types/es6-promise": "^3.3.0",
@@ -27,7 +27,7 @@
         "tsc": "^1.20150623.0",
         "typescript": "^3.0.1"
 
-####Databese
+#### Databese
 
 The database is saved in sqlite and consists of 4 Tables (everything without a type declaration is a string)
 
@@ -56,7 +56,7 @@ The database is saved in sqlite and consists of 4 Tables (everything without a t
 
 For futher information like which colums each table has, look at the typescript files in the `server/models` folder.
 
-####Routes
+#### Routes
 
 Those can be found in the `server/routes` folder. Like with the Tabel there are 4 main routs
 
@@ -68,7 +68,7 @@ Those can be found in the `server/routes` folder. Like with the Tabel there are 
 All routs work on port 3000.  
 Comon functions between those routs:
 
-#####...:3000/[route]
+##### ...:3000/[route]
 A get request at any of those routs above will get you a respone with all entrys in the respektive tables in JSON-Format.  
 Eg.: a get request on `http://localhost:3000/events/` will give you a respone with the members of the Event-table with the datatype JSON.  
      resone might be:
@@ -116,7 +116,7 @@ Eg.: a get request on `http://localhost:3000/events/` will give you a respone wi
     ]
     
 
-#####...:3000/[route]/new
+##### ...:3000/[route]/new
 
 A post request with the JSON datatype at `...:3000/[route]/new` will create a new Element in the Table. The response will be the created Element in JSON.  
 Eg.: request body to `http://localhost:3000/events/new`.:
@@ -153,7 +153,7 @@ A response to this request could be:
 An important exeption would be a new Event since it tests if the Kategory and System exists, if they don't it will send an error.
 
 
-#####...:3000/[route]/:id
+##### ...:3000/[route]/:id
 
 A delete request at `...:3000/[route]/delete/:id` with the `:id` refering to the primary key will delete the element from the table. As a response you will get the deleted element as JSON.  
 Eg.: delete-request at `http://localhost:3000/events/delete/1` will delete the element with id=1 from table Event.

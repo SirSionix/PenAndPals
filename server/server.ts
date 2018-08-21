@@ -1,4 +1,5 @@
 import * as express from "express";
+import {Request, Response} from "express";
 import * as bodyParser from "body-parser";
 import {users} from "./routes/users";
 import {createServer} from "http";
@@ -9,12 +10,25 @@ import {systeme} from "./routes/systeme";
 
 // später entfernen
 import {Kategorie} from "./models/Kategorie";
+import * as path from "path";
 
 export const app = express();
 
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json({limit: '5mb'}));
+
+app.get('/', (req: Request, res: Response) => {
+    res.header( 'Content-Type', 'text/html');
+    res.sendFile(path.join(__dirname + '/../client/Startseite.html'));
+});
+
+app.get('/login', (req: Request, res: Response) => {
+    res.header( 'Content-Type', 'text/html');
+    res.sendFile(path.join(__dirname + '/../client/Einloggen.html'));
+});
+
+app.use('/assets', express.static(__dirname + '/../client/assets'));
 
 app.use('/users', users);
 app.use('/events', events);
