@@ -1,7 +1,7 @@
 import {NextFunction, Router} from "express";
 import {Request, Response} from "express";
 import {User} from "../models/User";
-import {sequelize} from "../sequelize";
+import {hash} from "bcrypt";
 
 export const users = Router();
 
@@ -16,6 +16,7 @@ users.get("/", async (req: Request, res: Response, next: NextFunction) => {
         res.json(await User.findAll());
         
     } catch (e) {
+        res.status(500).json({error: e});
         next(e);
     }
 });
@@ -26,9 +27,28 @@ users.post("/new", async (req: Request, res: Response, next: NextFunction) => {
        res.header("Access-Control-Allow-Origin", "*");
        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-       let user : User = await User.create(req.body);
-       res.status(201).json(user);
+       hash(req.body.password,10,async (err, hash)=>{
+           try {
+
+
+               if (err) {
+                   return res.status(500).json({error: err});
+               } else {
+                   let newUser = ({
+                       name: req.body.name,
+                       email: req.body.email,
+                       password: hash
+                   });
+                   res.status(201).json(await User.create(newUser));
+               }
+           }catch (e) {
+               res.status(500).json({error: e});
+               next(e);
+           }
+       });
+
    } catch (e) {
+       res.status(500).json({error: e});
        next(e);
    }
     //await sequelize.sync(/*{force: true}*/);
@@ -50,7 +70,8 @@ users.delete("/:id", async (req: Request, res: Response, next: NextFunction) => 
        });
        res.status (200).json(user)
    } catch (e) {
-       next (e);
+       res.status(500).json({error: e});
+       next(e);
    }
    // await sequelize.sync(/*{force: true}*/);
 });

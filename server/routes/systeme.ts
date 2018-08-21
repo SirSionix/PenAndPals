@@ -16,6 +16,7 @@ systeme.get("/", async (req: Request, res: Response, next: NextFunction) => {
         res.json(await System.findAll());
 
     } catch (e) {
+        res.status(500).json({error: e});
         next(e);
     }
 
@@ -30,6 +31,7 @@ systeme.post("/new", async (req: Request, res: Response, next: NextFunction) => 
         let system : System = await System.create(req.body);
         res.status(201).json(system);
     } catch (e) {
+        res.status(500).json({error: e});
         next(e);
     }
     // await sequelize.sync(/*{force: true}*/);
@@ -51,7 +53,8 @@ systeme.delete("/:id", async (req: Request, res: Response, next: NextFunction) =
         });
         res.status (200).json(system)
     } catch (e) {
-        next (e);
+        res.status(500).json({error: e});
+        next(e);
     }
     // await sequelize.sync(/*{force: true}*/);
 });

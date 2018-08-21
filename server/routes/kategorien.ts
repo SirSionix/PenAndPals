@@ -16,6 +16,7 @@ kategorien.get("/", async (req: Request, res: Response, next: NextFunction) => {
 
         res.json(await Kategorie.findAll());
     } catch (e) {
+        res.status(500).json({error: e});
         next(e);
     }
 });
@@ -29,6 +30,7 @@ kategorien.post("/new", async (req: Request, res: Response, next: NextFunction) 
         let kategorie : Kategorie = await Kategorie.create(req.body);
         res.status(201).json(kategorie);
     } catch (e) {
+        res.status(500).json({error: e});
         next(e);
     }
     // await sequelize.sync(/*{force: true}*/);
@@ -50,7 +52,8 @@ kategorien.delete("/:id", async (req: Request, res: Response, next: NextFunction
         });
         res.status (200).json(kategorie)
     } catch (e) {
-        next (e);
+        res.status(500).json({error: e});
+        next(e);
     }
     // await sequelize.sync(/*{force: true}*/);
 });

@@ -42,6 +42,7 @@ events.get("/", async (req: Request, res: Response, next: NextFunction) => {
         res.json(await Event.findAll());
 
     } catch (e) {
+        res.status(500).json({error: e});
         next(e);
     }
 });
@@ -68,6 +69,7 @@ events.get("/src", async (req: Request, res: Response, next: NextFunction) => {
         }));
 
     } catch (e) {
+        res.status(500).json({error: e});
         next(e);
     }
 });
@@ -83,6 +85,7 @@ events.post("/new", async (req: Request, res: Response, next: NextFunction) => {
         let event : Event = await Event.create(req.body);
         res.status(201).json(event);
     } catch (e) {
+        res.status(500).json({error: e});
         next(e);
     }
    // await sequelize.sync(/*{force: true}*/);
@@ -104,6 +107,7 @@ events.delete("/:id", async (req: Request, res: Response, next: NextFunction) =>
         });
         res.status (200).json(event)
     } catch (e) {
+        res.status(500).json({error: e});
         next (e);
     }
    // await sequelize.sync(/*{force: true}*/);
