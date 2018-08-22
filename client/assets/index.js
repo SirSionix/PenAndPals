@@ -1,28 +1,27 @@
 $(document).ready(() => {
 
-    // Menüs mit Daten vom Server befüllen
+    // fills menues with data from the server
     populateCategoriesDropdown();
     populateSystemsDropdown();
 
 
-    // Benutzer anlegen
+    // create user
     $('#BenutzerAnlegenBtn').click(createUser);
 
-    // Event anlegen
+    // create events
     $('#EventAnlegenBtn').click(createEvent);
 
-    // Event suchen
+    // search for events
     $('#EventSuchenBtn').click(searchEvent);
 });
 
 
 
 /**
- * - Query server for available categories
- * - clear out dropdown menues
- * - add categories from server reply to both dropdown menues (from search and create view)
+ * Queries the server for available categories. Dropdown menues are being cleared out.
+ * Takes the server reply to fill both dropdown menues in both the search and create view.
  *
- * @summary Fills the dropdown menues with catagories from the server
+ * @summary Fills the dropdown menues with categories from the server
  */
 function populateCategoriesDropdown() {
     $.ajax({
@@ -51,9 +50,8 @@ function populateCategoriesDropdown() {
 
 
 /**
- * - Query server for available systems
- * - clear out dropdown menues
- * - add categories from server reply to both dropdown menues (from search and create view)
+ * Queries the server for available systems. Dropdown menues are being cleared out.
+ * Takes the server reply to fill both dropdown menues in both the search and create view.
  *
  * @summary Fills the dropdown menues with systems from the server
  */
@@ -81,12 +79,10 @@ function populateSystemsDropdown() {
     });
 }
 
-
-
 /**
- * Takes input from the 'Name', 'Passwort', 'Passwort bestätigen' and 'Email' fields and if none
- * of the fields are empty and the password matches the repetition performs AJAX POST call to
- * <code>/users/new</code> to create a new user.
+ * Takes input from the 'Name','Email', 'Passwort' and the 'Passwort bestätigen' input field,
+ * builds a query from the non-empty fields. An AJAX POST to <code>/users/new</code> is performed
+ * to create a new user.
  *
  * @summary Creates a new user using input from fields
  */
@@ -112,11 +108,11 @@ function createUser() {
 }
 
 
-
 /**
- * - takes input from ... fields
- * - check for empty fields (not all, some are optional)
- * - perform AJAX POST call to <code>/events/new</code>
+ * Takes input from the 'NameInputTA', 'PLZInputTA', 'OrtInputTA', 'KontaktInputTA', 'kat-dropdown-anlegen',
+ * 'sys-dropwodn-anlegen', 'BeschreibungAnlegen', and the 'DatumAnlegen' input field,
+ * builds a query from the non-empty, non-optional fields. An AJAX POST to <code>/events/new</code>
+ * is performed to create a new event.
  *
  * @summary Creates a new event
  */
