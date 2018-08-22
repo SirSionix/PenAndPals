@@ -1,0 +1,1 @@
+All client-side functions operate entirely using side-effects and have neither parameters nor return values.

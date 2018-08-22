@@ -7,9 +7,6 @@ import {sequelize} from "./sequelize";
 import {events} from "./routes/events";
 import {kategorien} from "./routes/kategorien";
 import {systeme} from "./routes/systeme";
-
-// später entfernen
-import {Kategorie} from "./models/Kategorie";
 import * as path from "path";
 
 export const app = express();
@@ -35,25 +32,16 @@ app.use('/events', events);
 app.use('/kategorien', kategorien);
 app.use('/systeme', systeme);
 
-// Beispieldaten einfügen
-/*(async () => {
-    try {
-        await Kategorie.create({
-            name: "Larp",
-            beschreibung: "Life Action Roleplay"
-        });
-    } catch (e) {
-
-    }
-})(); */
-
 //Server wird gestartet
 (async () => {
     await sequelize.sync(/*{force: true}*/);
 
+    let port = 3000;
+
     createServer(app)
-        .listen(3000, () => {
-            console.log("My API is running...");
+        .listen(port, () => {
+            console.log("Server is running on port " + port + " ...");
+            console.log("   http://localhost:" + port);
             sequelize
                 .authenticate()
                 .then(() => {
@@ -64,5 +52,3 @@ app.use('/systeme', systeme);
                 });
         })
 })();
-
-

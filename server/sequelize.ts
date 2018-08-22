@@ -5,6 +5,8 @@ export const sequelize =  new Sequelize({
     dialect: 'sqlite',
     username: 'root',
     password: '',
+    logging: false,
     storage: 'server/database.sqlite',
+    operatorsAliases: false,
     modelPaths: [__dirname + '/models']
 });
