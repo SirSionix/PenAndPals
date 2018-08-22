@@ -4,8 +4,8 @@
     node >= 10.3.0
 
 ## Run
-    npm install
-    npm start
+    $ npm install
+    $ npm start
     
 ## Dokumentation
 
