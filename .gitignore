@@ -157,3 +157,6 @@ fabric.properties
 *.js.map
 !client/assets/index.js
 *.sqlite
+
+apidoc/
+
