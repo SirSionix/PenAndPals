@@ -159,4 +159,4 @@ fabric.properties
 *.sqlite
 
 apidoc/
-
+jsdoc/

@@ -18,7 +18,11 @@ $(document).ready(() => {
 
 
 /**
- * Fills the dropdown menues with Katagories from the server
+ * - Query server for available categories
+ * - clear out dropdown menues
+ * - add categories from server reply to both dropdown menues (from search and create view)
+ *
+ * @summary Fills the dropdown menues with catagories from the server
  */
 function populateCategoriesDropdown() {
     $.ajax({
@@ -46,8 +50,12 @@ function populateCategoriesDropdown() {
 
 
 
-/*
- * Fills the dropdown menues with systems from the server
+/**
+ * - Query server for available systems
+ * - clear out dropdown menues
+ * - add categories from server reply to both dropdown menues (from search and create view)
+ *
+ * @summary Fills the dropdown menues with systems from the server
  */
 function populateSystemsDropdown() {
     $.ajax({
@@ -76,7 +84,11 @@ function populateSystemsDropdown() {
 
 
 /**
- * Creates a new user
+ * Takes input from the 'Name', 'Passwort', 'Passwort bestätigen' and 'Email' fields and if none
+ * of the fields are empty and the password matches the repetition performs AJAX POST call to
+ * <code>/users/new</code> to create a new user.
+ *
+ * @summary Creates a new user using input from fields
  */
 function createUser() {
     var name     = $('#BenutzernameInputReg').val();
@@ -85,7 +97,6 @@ function createUser() {
     var passwordCheck = $('#PassCheckInputReg').val()
 
     if (name != '' && email != '' && password != '' && passwordCheck == password) {
-        console.log("test");
 
         $.ajax({
             url: '/users/new',
@@ -97,14 +108,17 @@ function createUser() {
             },
             dataType: 'json',
         });
-        console.log("test2");
     }
 }
 
 
 
 /**
- * Creates a new event
+ * - takes input from ... fields
+ * - check for empty fields (not all, some are optional)
+ * - perform AJAX POST call to <code>/events/new</code>
+ *
+ * @summary Creates a new event
  */
 function createEvent() {
     var name    = $('#NameInputTA').val();
@@ -138,7 +152,13 @@ function createEvent() {
 
 
 /**
- * Searches for an event
+ * Takes input from the 'Kategorien' and 'System' dropdown menues and the 'PLZ' input field,
+ * builds a query from the non-empty fields. Only the first two digits from the 'PLZ' field
+ * are used. After clearing potential existing search results, an AJAX call to
+ * <code>/events/src</code> is performed. The results sent back from the server are then
+ * displayed in a list.
+ *
+ * @summary Queries the server for events and displays the results
  */
 function searchEvent() {
     var kat   = $('#kat-dropdown-suchen :selected').text();

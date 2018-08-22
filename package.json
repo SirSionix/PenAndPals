@@ -1,7 +1,8 @@
 {
   "scripts": {
     "apidoc": "apidoc -i server/ -o apidoc/",
-    "prestart": "tsc -p tsconfig.json && npm run apidoc",
+    "jsdoc": "jsdoc client/assets/index.js --readme client-readme.md -d jsdoc",
+    "prestart": "tsc -p tsconfig.json && npm run apidoc && npm run jsdoc",
     "start": "opener http://localhost:3000 && node server/server.js"
   },
   "name": "penandpals",
@@ -20,6 +21,7 @@
     "bcrypt": "^3.0.0",
     "body-parser": "^1.17.1",
     "express": "^4.16.3",
+    "jsdoc": "^3.5.5",
     "opener": "^1.5.0",
     "reflect-metadata": "^0.1.12",
     "sequelize": "^4.38.0",
