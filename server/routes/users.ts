@@ -1,7 +1,7 @@
 import {NextFunction, Router} from "express";
 import {Request, Response} from "express";
 import {User} from "../models/User";
-import {hash} from "bcrypt";
+import {compare, hash} from "bcrypt";
 
 export const users = Router();
 
@@ -74,4 +74,35 @@ users.delete("/:id", async (req: Request, res: Response, next: NextFunction) => 
        next(e);
    }
    // await sequelize.sync(/*{force: true}*/);
+});
+
+users.post("/loggin", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+        let user:User = null;
+
+        if (req.body.name || req.body.email) {
+            if (user = await User.find(req.body.name || req.body.email)){
+                compare(req.body.password, user.password,(err,result)=>{
+                   if (err){
+                       res.status(401).json({error: "Autentifikation fehlgeschlagen"});
+                   }else if(result){
+                       res.status(200).json({error: "Autentifikation erfolgreich"});
+                   }else{
+                       res.status(401).json({error: "Autentifikation fehlgeschlagen"});
+                   }
+
+                });
+            }
+            console.log(user.toJSON());
+        }else{
+            res.status(401).json({error: "Autentifikation fehlgeschlagen"});
+        }
+
+    } catch (e) {
+        res.status(500).json({error: e});
+        next(e);
+    }
 });
