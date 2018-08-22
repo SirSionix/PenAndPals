@@ -9,7 +9,7 @@
   "version": "1.0.0",
   "description": "A platform to find groups for roleplaying",
   "main": "index.js",
-  "author": "Silvio Brück & Elsa Barsalou",
+  "author": "Silvio Brueck & Elsa Barsalou",
   "license": "ISC",
   "dependencies": {
     "@types/bcrypt": "^2.0.0",
@@ -21,6 +21,7 @@
     "bcrypt": "^3.0.0",
     "body-parser": "^1.17.1",
     "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
     "jsdoc": "^3.5.5",
     "opener": "^1.5.0",
     "reflect-metadata": "^0.1.12",
