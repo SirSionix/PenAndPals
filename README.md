@@ -60,8 +60,8 @@ For futher information like which colums each table has, look at the typescript 
 
 Those can be found in the `server/routes` folder. Like with the Tabel there are 4 main routs
 
-- `...:3000events/`
-- `...:3000kategorien/`
+- `...:3000/events/`
+- `...:3000/kategorien/`
 - `...:3000/systeme/`
 - `...:3000/users/`
 

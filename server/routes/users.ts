@@ -2,6 +2,8 @@ import {NextFunction, Router} from "express";
 import {Request, Response} from "express";
 import {User} from "../models/User";
 import {compare, hash} from "bcrypt";
+import {sign} from "jsonwebtoken";
+import {checkAuth} from "../middleware/checkAuth"
 
 export const users = Router();
 
@@ -76,20 +78,32 @@ users.delete("/:id", async (req: Request, res: Response, next: NextFunction) => 
    // await sequelize.sync(/*{force: true}*/);
 });
 
-users.post("/loggin", async (req: Request, res: Response, next: NextFunction) => {
+users.post("/login", async (req: Request, res: Response, next: NextFunction) => {
     try {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
         let user:User = null;
 
-        if (req.body.name || req.body.email) {
-            if (user = await User.find(req.body.name || req.body.email)){
+        if (req.body.email) {
+            if (user = await User.find(req.body.email)){
                 compare(req.body.password, user.password,(err,result)=>{
                    if (err){
                        res.status(401).json({error: "Autentifikation fehlgeschlagen"});
                    }else if(result){
-                       res.status(200).json({error: "Autentifikation erfolgreich"});
+                       let token = sign({
+                           email: user.email,
+                           userID: user.id
+                       },"privateKey",{
+                           expiresIn: "1h"
+                       });
+
+                       console.log(token);
+
+                       res.status(200).json({
+                           message: "Autentifikation erfolgreich",
+                           token: token
+                       });
                    }else{
                        res.status(401).json({error: "Autentifikation fehlgeschlagen"});
                    }
