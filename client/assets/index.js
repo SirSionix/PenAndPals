@@ -307,7 +307,7 @@ function login() {
         });
     } else {
         displayError("Anmeldung nicht möglich. Füllen Sie bitte alle benötigten Felder aus.");
-}
+    }
 }
 
 
