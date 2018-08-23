@@ -149,7 +149,9 @@ function createUser() {
             },
             dataType: 'json',
         });
-    }
+    } else {
+    displayNotification("Nutzer nicht angelegt. Füllen Sie bitte alle benötigten Felder aus.");
+}
 }
 
 
@@ -201,6 +203,8 @@ function createEvent() {
             },
             dataType: 'json',
         });
+    } else {
+        displayNotification("Event nicht erstellt. Füllen Sie bitte alle benötigten Felder aus.");
     }
 }
 
@@ -301,7 +305,9 @@ function login() {
             },
             dataType: 'json'
         });
-    }
+    } else {
+    displayNotification("Anmeldung nicht möglich. Füllen Sie bitte alle benötigten Felder aus.");
+}
 }
 
 
