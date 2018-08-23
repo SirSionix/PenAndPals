@@ -133,8 +133,36 @@ function createUser() {
                 "email": email,
                 "password": password
             },
-            success: (data) => {
-                displayNotification("Sie können sich nun einloggen.");
+            success: () => {
+                $.ajax({
+                    url: "/users/login",
+                    type: "POST",
+                    data: {
+                        email: email,
+                        password: password
+                    },
+                    success: (data) => {
+                        window.sessionStorage.setItem('name', data.name);
+                        window.sessionStorage.setItem('token', data.token);
+                        showLoginStatus();
+
+                        // Reset password fields
+                        $('#PassInputLog').val('');
+                        $('#PassInputReg').val('');
+                        $('#PassCheckInputReg').val('');
+                        self.location.href='/';
+                    },
+                    error: (jqXHR) => {
+                        let messageBody = $.parseJSON(jqXHR.responseText);
+                        displayError(messageBody.error);
+
+                        // Reset password fields
+                        $('#PassInputLog').val('');
+                        $('#PassInputReg').val('');
+                        $('#PassCheckInputReg').val('');
+                    },
+                    dataType: 'json'
+                });
             },
             error: (jqXHR) => {
                 let messageBody = $.parseJSON(jqXHR.responseText);
