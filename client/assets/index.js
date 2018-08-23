@@ -248,23 +248,22 @@ function searchEvent() {
 
 
 /**
- * Takes input from 'Name' and 'Passwort' fields, checks for empty fields and performs
+ * Takes input from 'Email' and 'Passwort' fields, checks for empty fields and performs
  * AJAX POST to <code>/users/login</code>. On success, the received JSON Web Token and
  * the username are stored in SessionStorage for later authentication.
  *
  * @summary Logs user in and stores username and session token
  */
 function login() {
-    let name     = $('#NameInputLog').val();
-    let mail     = $('#MailInputLog').val();
+    let email    = $('#MailInputLog').val();
     let password = $('#PassInputLog').val();
 
-    if (name != '' && password != '') {
+    if (email != '' && password != '') {
         $.ajax({
             url: "/users/login",
             type: "POST",
             data: {
-                email: mail,
+                email: email,
                 password: password
             },
             success: (data) => {
