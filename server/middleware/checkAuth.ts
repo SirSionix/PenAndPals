@@ -9,7 +9,7 @@ export function checkAuth(req: Request, res: Response, next: NextFunction) {
             //req.userData = decoded;
             next();
         } else {
-            res.status(401).json({error: "Autentifikation fehlgeschlagen"});
+            res.status(401).json({error: "Authentifizierung fehlgeschlagen"});
         }
     } catch (e) {
         res.status(500).json({error: e});
