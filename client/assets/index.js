@@ -135,6 +135,7 @@ function createUser() {
             },
             succes: (data) => {
                 // TODO rückmeldung in oberfläche
+                displayNotification("Sie können sich nun einloggen.");
             },
             error: (jqXHR) => {
                 let messageBody = $.parseJSON(jqXHR.responseText);
@@ -143,6 +144,8 @@ function createUser() {
                 // Reset password fields
                 $('#PassInputReg').val('');
                 $('#PassCheckInputReg').val('');
+                displayNotification("Registierung fehlgeschlagen. Email schon vorhanden?.");
+
             },
             dataType: 'json',
         });
@@ -190,10 +193,11 @@ function createEvent() {
                 "datum": datum
             },
             success: (data) => {
-                // TODO "event erstellt"-nachricht
+                displayNotification("Event erstellt.");
             },
             error: (data) => {
                 // TODO fehlermeldung aus server-antwort anzeigen
+                displayNotification("Event nicht erstellt. Füllen Sie bitte alle benötigten Felder aus und loggen Sie sich ein.");
             },
             dataType: 'json',
         });
