@@ -102,6 +102,7 @@ users.post("/login", async (req: Request, res: Response, next: NextFunction) => 
 
                        res.status(200).json({
                            message: "Autentifikation erfolgreich",
+                           name: user.name,
                            token: token
                        });
                    }else{

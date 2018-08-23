@@ -4,6 +4,9 @@ $(document).ready(() => {
     populateCategoriesDropdown();
     populateSystemsDropdown();
 
+    // show login status
+    showLoginStatus();
+
 
     // create user
     $('#BenutzerAnlegenBtn').click(createUser);
@@ -11,12 +14,35 @@ $(document).ready(() => {
     // login
     $('#BenutzerEinloggenBtn').click(login);
 
+    // logout
+    $('#AusloggenBtn').click(logout);
+
     // create events
     $('#EventAnlegenBtn').click(createEvent);
 
     // search for events
     $('#EventSuchenBtn').click(searchEvent);
 });
+
+
+/**
+ * Checks SessionStorage for existing username and JWT Access Token and shows/hides
+ * login/logout buttons accordingly.
+ *
+ * @summary Displays login status
+ */
+function showLoginStatus() {
+    let name = window.sessionStorage.getItem('name');
+
+    if (name && window.sessionStorage.getItem('token')) {
+        $('#AnmeldungsBtn').hide();
+        $('#AusloggenBtn').text(name + ' abmelden').show();
+    } else {
+        window.sessionStorage.clear();
+        $('#AnmeldungsBtn').show();
+        $('#AusloggenBtn').text('Ausloggen').hide();
+    }
+}
 
 
 
@@ -107,7 +133,6 @@ function createUser() {
             },
             succes: (data) => {
                 // TODO rückmeldung in oberfläche
-                window.alert("Benutzer angelegt");
             },
             dataType: 'json',
         });
@@ -156,11 +181,9 @@ function createEvent() {
             },
             success: (data) => {
                 // TODO "event erstellt"-nachricht
-                window.alert("Event angelegt");
             },
             error: (data) => {
                 // TODO fehlermeldung aus server-antwort anzeigen
-                window.alert("Anlegen gescheitert. Sind Sie eingeloggt? Sind alle Angaben ausgefüllt?");
             },
             dataType: 'json',
         });
@@ -226,13 +249,14 @@ function searchEvent() {
 
 /**
  * Takes input from 'Name' and 'Passwort' fields, checks for empty fields and performs
- * AJAX POST to <code>/users/login</code>. On success, the received JSON Web Token is
- * stored in SessionStorage for later authentication.
+ * AJAX POST to <code>/users/login</code>. On success, the received JSON Web Token and
+ * the username are stored in SessionStorage for later authentication.
  *
- * @summary Logs user in and stores session token
+ * @summary Logs user in and stores username and session token
  */
 function login() {
-    let name     = $('#MailInputLog').val();
+    let name     = $('#NameInputLog').val();
+    let mail     = $('#MailInputLog').val();
     let password = $('#PassInputLog').val();
 
     if (name != '' && password != '') {
@@ -240,11 +264,14 @@ function login() {
             url: "/users/login",
             type: "POST",
             data: {
-                email: name,
+                email: mail,
                 password: password
             },
             success: (data) => {
+                window.sessionStorage.setItem('name', data.name);
                 window.sessionStorage.setItem('token', data.token);
+                showLoginStatus();
+                self.location.href='/';
             },
             error: (data) => {
                 // TODO fehlermeldung anzeigen
@@ -252,4 +279,16 @@ function login() {
             dataType: 'json'
         });
     }
+}
+
+
+
+/**
+ * Clears SessionStorage, including username and Access Token, in effect logging the user out.
+ *
+ * @summary Logs user out
+ */
+function logout() {
+    window.sessionStorage.clear();
+    showLoginStatus();
 }
