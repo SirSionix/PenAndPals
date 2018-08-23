@@ -121,6 +121,8 @@ function createUser() {
     let password      = $('#PassInputReg').val();
     let passwordCheck = $('#PassCheckInputReg').val()
 
+    clearNotifications();
+
     if (name != '' && email != '' && password != '' && passwordCheck == password) {
 
         $.ajax({
@@ -133,6 +135,14 @@ function createUser() {
             },
             succes: (data) => {
                 // TODO rückmeldung in oberfläche
+            },
+            error: (jqXHR) => {
+                let messageBody = $.parseJSON(jqXHR.responseText);
+                displayNotification(messageBody.error);
+
+                // Reset password fields
+                $('#PassInputReg').val('');
+                $('#PassCheckInputReg').val('');
             },
             dataType: 'json',
         });
@@ -205,6 +215,8 @@ function searchEvent() {
     let kat   = $('#kat-dropdown-suchen :selected').text();
     let plz   = $('#PLZInputTF').val();
     let sys   = $('#sys-dropdown-suchen :selected').text();
+
+    // Build query
     let query = {};
 
     if (kat != '' && kat != 'Kategorie auswählen')
@@ -218,6 +230,7 @@ function searchEvent() {
 
     let queryString = $.param(query);
 
+    clearNotifications();
 
     // Clear old search results
     $('#results').children().remove();
@@ -228,7 +241,9 @@ function searchEvent() {
         success: (data) => {
             let liste = $('#results');
 
-            if (data != '') {
+            if (data === undefined || data.length == 0) {
+                displayNotification("Schade! Ihre Suche ergab leider keine Ergebnisse.");
+            } else {
                 $.each(data, (k, v) => {
                         $('<div>').addClass('result').append(
                             $('<hr>'),
@@ -241,7 +256,6 @@ function searchEvent() {
                     }
                 )
             }
-            // TODO: anzeigen, dass es keine ergebnisse gab
         }
     });
 }
@@ -258,6 +272,8 @@ function login() {
     let email    = $('#MailInputLog').val();
     let password = $('#PassInputLog').val();
 
+    clearNotifications();
+
     if (email != '' && password != '') {
         $.ajax({
             url: "/users/login",
@@ -272,8 +288,12 @@ function login() {
                 showLoginStatus();
                 self.location.href='/';
             },
-            error: (data) => {
-                // TODO fehlermeldung anzeigen
+            error: (jqXHR) => {
+                let messageBody = $.parseJSON(jqXHR.responseText);
+                displayNotification(messageBody.error);
+
+                // Reset password field
+                $('#PassInputLog').val('');
             },
             dataType: 'json'
         });
@@ -290,4 +310,34 @@ function login() {
 function logout() {
     window.sessionStorage.clear();
     showLoginStatus();
+}
+
+
+
+/**
+ * Clears the text of the notification and hides the surrounding <code>&lt;div&gt;</code> element.
+ *
+ * @summary Clear notifications
+ */
+function clearNotifications() {
+    let benachrichtigung = $('#Benachrichtigung :first-child');
+
+    benachrichtigung.text('');
+    benachrichtigung.parent().hide();
+}
+
+
+
+/**
+ * Sets the text for the notification and shows the surrounding <code>&lt;div&gt;</code> element.
+ *
+ * @summary Show notification
+ *
+ * @param {string} message - The message to display
+ */
+function displayNotification(message) {
+    let benachrichtigung = $('#Benachrichtigung :first-child');
+
+    benachrichtigung.text(message);
+    benachrichtigung.parent().show();
 }
