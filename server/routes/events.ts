@@ -25,7 +25,7 @@ let header = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin'
  */
 
 /**
- * @apiDefine Autentifikationsheader
+ * @apiDefine Authentifizierungheader
  *
  * @apiHeader {string} authorization Token
  * @apiHeaderExample {string} Header-Example:
@@ -115,7 +115,7 @@ events.get("/src", async (req: Request, res: Response, next: NextFunction) => {
  * @apiGroup Events
  * @apiDescription Dieser Request erstellt ein neues Event mit den mitgeleiferten Daten und speichert diesen in der Datenbank. Der Response ist das erstellte element
  *
- * @apiUse Autentifikationsheader
+ * @apiUse Authentifizierungheader
  *
  * @apiParam {String} name  Name of the Event.
  * @apiParam {String} plz  PLZ des Ortes wo das Event stattfinden soll.
