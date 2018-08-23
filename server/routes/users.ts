@@ -177,6 +177,14 @@ users.delete("/:id", checkAuth, async (req: Request, res: Response, next: NextFu
  *            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhbnNAd3Vyc3QuZGUiLCJ1c2VySUQiOjEsImlhdCI6MTUzNTAzMDIxNywiZXhwIjoxNTM1MDMzODE3fQ.ZpdaSamixDhc3D24KpQ5P5DKTRTcgPZ_eNVKsam7LrY"
  *        }
  *
+ * @apiError error Authentifizierung fehlgeschlagen
+ *
+ * @apiErrorExample
+ *     HTTP/1.1 401 error
+ *        {
+ *            "error": "Authentifizierung fehlgeschlagen",
+ *        }
+ *
  */
 
 users.post("/login", async (req: Request, res: Response, next: NextFunction) => {
