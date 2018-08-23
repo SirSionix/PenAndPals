@@ -7,6 +7,8 @@
     $ npm install
     $ npm start
     
+Die Seite muss nach Start neu geladen werden.
+    
 ## Dokumentation
 
 Die Doku kann mit Hilfe des folgenden Befehls generiert und geöffnet werden:
