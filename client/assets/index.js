@@ -107,6 +107,7 @@ function createUser() {
             },
             succes: (data) => {
                 // TODO rückmeldung in oberfläche
+                window.alert("Benutzer angelegt");
             },
             dataType: 'json',
         });
@@ -155,9 +156,11 @@ function createEvent() {
             },
             success: (data) => {
                 // TODO "event erstellt"-nachricht
+                window.alert("Event angelegt");
             },
             error: (data) => {
                 // TODO fehlermeldung aus server-antwort anzeigen
+                window.alert("Anlegen gescheitert. Sind Sie eingeloggt? Sind alle Angaben ausgefüllt?");
             },
             dataType: 'json',
         });
@@ -229,7 +232,7 @@ function searchEvent() {
  * @summary Logs user in and stores session token
  */
 function login() {
-    let name     = $('#BenutzernameInputLog').val();
+    let name     = $('#MailInputLog').val();
     let password = $('#PassInputLog').val();
 
     if (name != '' && password != '') {
