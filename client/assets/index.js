@@ -133,7 +133,7 @@ function createUser() {
                 "email": email,
                 "password": password
             },
-            succes: (data) => {
+            success: (data) => {
                 displayNotification("Sie können sich nun einloggen.");
             },
             error: (jqXHR) => {
@@ -143,7 +143,7 @@ function createUser() {
                 // Reset password fields
                 $('#PassInputReg').val('');
                 $('#PassCheckInputReg').val('');
-                displayNotificatio("Registierung fehlgeschlagen. Email schon vorhanden?.");
+                displayError("Registierung fehlgeschlagen. Email schon vorhanden?.");
 
             },
             dataType: 'json',
