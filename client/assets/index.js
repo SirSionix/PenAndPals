@@ -306,7 +306,7 @@ function login() {
             dataType: 'json'
         });
     } else {
-    displayError("Anmeldung nicht möglich. Füllen Sie bitte alle benötigten Felder aus.");
+        displayError("Anmeldung nicht möglich. Füllen Sie bitte alle benötigten Felder aus.");
 }
 }
 
