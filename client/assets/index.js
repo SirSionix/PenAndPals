@@ -135,22 +135,22 @@ function createUser() {
             },
             succes: (data) => {
                 // TODO rückmeldung in oberfläche
-                displayNotification("Sie können sich nun einloggen.");
+                displayNotificationerfolg("Sie können sich nun einloggen.");
             },
             error: (jqXHR) => {
                 let messageBody = $.parseJSON(jqXHR.responseText);
-                displayNotification(messageBody.error);
+                displayNotificationerror(messageBody.error);
 
                 // Reset password fields
                 $('#PassInputReg').val('');
                 $('#PassCheckInputReg').val('');
-                displayNotification("Registierung fehlgeschlagen. Email schon vorhanden?.");
+                displayNotificationerror("Registierung fehlgeschlagen. Email schon vorhanden?.");
 
             },
             dataType: 'json',
         });
     } else {
-    displayNotification("Nutzer nicht angelegt. Füllen Sie bitte alle benötigten Felder aus.");
+    displayNotificationerror("Nutzer nicht angelegt. Füllen Sie bitte alle benötigten Felder aus.");
 }
 }
 
@@ -195,16 +195,16 @@ function createEvent() {
                 "datum": datum
             },
             success: (data) => {
-                displayNotification("Event erstellt.");
+                displayNotificationerfolg("Event erstellt.");
             },
             error: (data) => {
                 // TODO fehlermeldung aus server-antwort anzeigen
-                displayNotification("Event nicht erstellt. Füllen Sie bitte alle benötigten Felder aus und loggen Sie sich ein.");
+                displayNotificationerror("Event nicht erstellt. Loggen Sie sich ein.");
             },
             dataType: 'json',
         });
     } else {
-        displayNotification("Event nicht erstellt. Füllen Sie bitte alle benötigten Felder aus.");
+        displayNotificationerror("Event nicht erstellt. Füllen Sie bitte alle benötigten Felder aus.");
     }
 }
 
@@ -250,7 +250,7 @@ function searchEvent() {
             let liste = $('#results');
 
             if (data === undefined || data.length == 0) {
-                displayNotification("Schade! Ihre Suche ergab leider keine Ergebnisse.");
+                displayNotificationerror("Schade! Ihre Suche ergab leider keine Ergebnisse.");
             } else {
                 $.each(data, (k, v) => {
                         $('<div>').addClass('result').append(
@@ -298,7 +298,7 @@ function login() {
             },
             error: (jqXHR) => {
                 let messageBody = $.parseJSON(jqXHR.responseText);
-                displayNotification(messageBody.error);
+                displayNotificationerror(messageBody.error);
 
                 // Reset password field
                 $('#PassInputLog').val('');
@@ -306,7 +306,7 @@ function login() {
             dataType: 'json'
         });
     } else {
-    displayNotification("Anmeldung nicht möglich. Füllen Sie bitte alle benötigten Felder aus.");
+    displayNotificationerror("Anmeldung nicht möglich. Füllen Sie bitte alle benötigten Felder aus.");
 }
 }
 
@@ -330,24 +330,41 @@ function logout() {
  * @summary Clear notifications
  */
 function clearNotifications() {
-    let benachrichtigung = $('#Benachrichtigung :first-child');
+    let benachrichtigungerror = $('#BenachrichtigungError :first-child');
+    let benachrichtigungerfolg = $('#BenachrichtigungErfolg :first-child');
 
-    benachrichtigung.text('');
-    benachrichtigung.parent().hide();
+    benachrichtigungerror.text('');
+    benachrichtigungerror.parent().hide();
+    benachrichtigungerfolg.text('');
+    benachrichtigungerfolg.parent().hide();
 }
 
 
 
 /**
- * Sets the text for the notification and shows the surrounding <code>&lt;div&gt;</code> element.
+ * Sets the text for the error notification and shows the surrounding <code>&lt;div&gt;</code> element.
  *
  * @summary Show notification
  *
  * @param {string} message - The message to display
  */
-function displayNotification(message) {
-    let benachrichtigung = $('#Benachrichtigung :first-child');
+function displayNotificationerror(message) {
+    let benachrichtigungerror = $('#BenachrichtigungError :first-child');
 
-    benachrichtigung.text(message);
-    benachrichtigung.parent().show();
+    benachrichtigungerror.text(message);
+    benachrichtigungerror.parent().show();
+}
+
+/**
+ * Sets the text for the positive notification and shows the surrounding <code>&lt;div&gt;</code> element.
+ *
+ * @summary Show notification
+ *
+ * @param {string} message - The message to display
+ */
+function displayNotificationerfolg(message) {
+    let benachrichtigungerfolg = $('#BenachrichtigungErfolg :first-child');
+
+    benachrichtigungerfolg.text(message);
+    benachrichtigungerfolg.parent().show();
 }
