@@ -59,6 +59,7 @@ users.get("/", async (req: Request, res: Response, next: NextFunction) => {
     }
 });
 */
+
 /**
  * @api {post} /users/new  Erstelle ein neues User
  * @apiName CreateNewUser
@@ -222,6 +223,8 @@ users.post("/login", async (req: Request, res: Response, next: NextFunction) => 
                    }
 
                 });
+            }else{
+                res.status(401).json({error: "Authentifizierung fehlgeschlagen"});
             }
         }else{
             res.status(401).json({error: "Authentifizierung fehlgeschlagen"});
