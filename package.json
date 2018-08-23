@@ -2,7 +2,9 @@
   "scripts": {
     "apidoc": "apidoc -i server/ -o apidoc/",
     "jsdoc": "jsdoc client/assets/index.js --readme client-readme.md -d jsdoc",
-    "prestart": "tsc -p tsconfig.json && npm run apidoc && npm run jsdoc",
+    "opendoc": "opener apidoc/index.html && opener jsdoc/index.html",
+    "doc": "npm run apidoc && npm run jsdoc && npm run opendoc",
+    "prestart": "tsc -p tsconfig.json",
     "start": "opener http://localhost:3000 && node server/server.js"
   },
   "name": "penandpals",
