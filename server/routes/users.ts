@@ -195,7 +195,11 @@ users.post("/login", async (req: Request, res: Response, next: NextFunction) => 
         let user:User = null;
 
         if (req.body.email) {
-            if (user = await User.find(req.body.email)){
+            if (user = await User.findOne({
+                where: {
+                    email: req.body.email
+                }
+            })){
                 compare(req.body.password, user.password,(err,result)=>{
                    if (err){
                        res.status(401).json({error: "Authentifizierung fehlgeschlagen"});
@@ -206,8 +210,6 @@ users.post("/login", async (req: Request, res: Response, next: NextFunction) => 
                        },"privateKey",{
                            expiresIn: "1h"
                        });
-
-                       console.log(token);
 
                        res.status(200).json({
                            message: "Authentifizierung erfolgreich",
@@ -220,7 +222,6 @@ users.post("/login", async (req: Request, res: Response, next: NextFunction) => 
 
                 });
             }
-            console.log(user.toJSON());
         }else{
             res.status(401).json({error: "Authentifizierung fehlgeschlagen"});
         }
