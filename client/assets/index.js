@@ -134,23 +134,22 @@ function createUser() {
                 "password": password
             },
             succes: (data) => {
-                // TODO rückmeldung in oberfläche
-                displayNotificationerfolg("Sie können sich nun einloggen.");
+                displayNotification("Sie können sich nun einloggen.");
             },
             error: (jqXHR) => {
                 let messageBody = $.parseJSON(jqXHR.responseText);
-                displayNotificationerror(messageBody.error);
+                displayError(messageBody.error);
 
                 // Reset password fields
                 $('#PassInputReg').val('');
                 $('#PassCheckInputReg').val('');
-                displayNotificationerror("Registierung fehlgeschlagen. Email schon vorhanden?.");
+                displayNotificatio("Registierung fehlgeschlagen. Email schon vorhanden?.");
 
             },
             dataType: 'json',
         });
     } else {
-    displayNotificationerror("Nutzer nicht angelegt. Füllen Sie bitte alle benötigten Felder aus.");
+    displayError("Nutzer nicht angelegt. Füllen Sie bitte alle benötigten Felder aus.");
 }
 }
 
@@ -172,6 +171,8 @@ function createEvent() {
     let sys     = $('#sys-dropdown-anlegen :selected').text();
     let beschr  = $('#BeschreibungAnlegen').val();
     let datum   = $('#DatumAnlegen').val();
+
+    clearNotifications();
 
     if (name != '' && plz != '' && kontakt != '' && kat != '' && sys != '') {
         $.ajax({
@@ -195,16 +196,15 @@ function createEvent() {
                 "datum": datum
             },
             success: (data) => {
-                displayNotificationerfolg("Event erstellt.");
+                displayNotification("Event erstellt.");
             },
             error: (data) => {
-                // TODO fehlermeldung aus server-antwort anzeigen
-                displayNotificationerror("Event nicht erstellt. Loggen Sie sich ein.");
+                displayError("Event nicht erstellt. Loggen Sie sich ein.");
             },
             dataType: 'json',
         });
     } else {
-        displayNotificationerror("Event nicht erstellt. Füllen Sie bitte alle benötigten Felder aus.");
+        displayError("Event nicht erstellt. Füllen Sie bitte alle benötigten Felder aus.");
     }
 }
 
@@ -250,7 +250,7 @@ function searchEvent() {
             let liste = $('#results');
 
             if (data === undefined || data.length == 0) {
-                displayNotificationerror("Schade! Ihre Suche ergab leider keine Ergebnisse.");
+                displayError("Schade! Ihre Suche ergab leider keine Ergebnisse.");
             } else {
                 $.each(data, (k, v) => {
                         $('<div>').addClass('result').append(
@@ -298,7 +298,7 @@ function login() {
             },
             error: (jqXHR) => {
                 let messageBody = $.parseJSON(jqXHR.responseText);
-                displayNotificationerror(messageBody.error);
+                displayError(messageBody.error);
 
                 // Reset password field
                 $('#PassInputLog').val('');
@@ -306,7 +306,7 @@ function login() {
             dataType: 'json'
         });
     } else {
-    displayNotificationerror("Anmeldung nicht möglich. Füllen Sie bitte alle benötigten Felder aus.");
+    displayError("Anmeldung nicht möglich. Füllen Sie bitte alle benötigten Felder aus.");
 }
 }
 
@@ -325,7 +325,7 @@ function logout() {
 
 
 /**
- * Clears the text of the notification and hides the surrounding <code>&lt;div&gt;</code> element.
+ * Clears the text of the notifications and hides the surrounding <code>&lt;div&gt;</code> element.
  *
  * @summary Clear notifications
  */
@@ -348,7 +348,7 @@ function clearNotifications() {
  *
  * @param {string} message - The message to display
  */
-function displayNotificationerror(message) {
+function displayError(message) {
     let benachrichtigungerror = $('#BenachrichtigungError :first-child');
 
     benachrichtigungerror.text(message);
@@ -362,7 +362,7 @@ function displayNotificationerror(message) {
  *
  * @param {string} message - The message to display
  */
-function displayNotificationerfolg(message) {
+function displayNotification(message) {
     let benachrichtigungerfolg = $('#BenachrichtigungErfolg :first-child');
 
     benachrichtigungerfolg.text(message);
