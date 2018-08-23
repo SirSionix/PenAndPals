@@ -7,8 +7,6 @@ import {checkAuth} from "../middleware/checkAuth"
 
 export const users = Router();
 
-let header = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'};
-
 
 /**
  * @apiDefine UserSuccess

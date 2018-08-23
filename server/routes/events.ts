@@ -1,12 +1,10 @@
-import {json, NextFunction, Router} from "express";
+import {NextFunction, Router} from "express";
 import {Request, Response} from "express";
 import {Event} from "../models/Event";
-import {sequelize} from "../sequelize";
 import {checkAuth} from "../middleware/checkAuth";
 
 export const events = Router();
 
-let header = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'};
 
 /**
  * @apiDefine EventSuccess

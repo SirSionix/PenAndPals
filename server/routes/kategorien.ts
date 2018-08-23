@@ -1,11 +1,8 @@
 import {NextFunction, Router} from "express";
 import {Request, Response} from "express";
 import {Kategorie} from "../models/Kategorie";
-import {sequelize} from "../sequelize";
 
 export const kategorien = Router();
-
-let header = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'};
 
 /**
  * @apiDefine KategorieSuccess

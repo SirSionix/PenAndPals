@@ -1,11 +1,8 @@
 import {NextFunction, Router} from "express";
 import {Request, Response} from "express";
 import {System} from "../models/System";
-import {sequelize} from "../sequelize";
 
 export const systeme = Router();
-
-let header = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'};
 
 
 /**
