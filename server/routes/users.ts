@@ -34,6 +34,7 @@ let header = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin'
  */
 
 /**
+ * @apiIgnore
  * @api {get} /users  Alle User ausgeben
  * @apiName GetUsers
  * @apiGroup User
@@ -43,7 +44,7 @@ let header = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin'
  * @apiUse UserSuccessExample
  *
  */
-
+/*
 // Alle vorhandenen User abfragen
 users.get("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -57,7 +58,7 @@ users.get("/", async (req: Request, res: Response, next: NextFunction) => {
         next(e);
     }
 });
-
+*/
 /**
  * @api {post} /users/new  Erstelle ein neues User
  * @apiName CreateNewUser
