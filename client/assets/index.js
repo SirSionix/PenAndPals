@@ -8,6 +8,9 @@ $(document).ready(() => {
     // create user
     $('#BenutzerAnlegenBtn').click(createUser);
 
+    // login
+    $('#BenutzerEinloggenBtn').click(login);
+
     // create events
     $('#EventAnlegenBtn').click(createEvent);
 
@@ -28,8 +31,8 @@ function populateCategoriesDropdown() {
         type: "GET",
         url: "/kategorien/",
         success: (data) => {
-            var kda = $('#kat-dropdown-anlegen');
-            var kds = $('#kat-dropdown-suchen');
+            let kda = $('#kat-dropdown-anlegen');
+            let kds = $('#kat-dropdown-suchen');
 
             kda.html('');
             kda.append('\'<option value="">Kategorie auswählen</option>\'');
@@ -60,8 +63,8 @@ function populateSystemsDropdown() {
         type: "GET",
         url: "/systeme/",
         success: (data) => {
-            var sda = $('#sys-dropdown-anlegen');
-            var sds = $('#sys-dropdown-suchen');
+            let sda = $('#sys-dropdown-anlegen');
+            let sds = $('#sys-dropdown-suchen');
 
             sda.html('');
             sda.append('\'<option value="">System auswählen</option>\'');
@@ -87,10 +90,10 @@ function populateSystemsDropdown() {
  * @summary Creates a new user using input from fields
  */
 function createUser() {
-    var name     = $('#BenutzernameInputReg').val();
-    var email    = $('#EmailInputReg').val();
-    var password = $('#PassInputReg').val();
-    var passwordCheck = $('#PassCheckInputReg').val()
+    let name          = $('#BenutzernameInputReg').val();
+    let email         = $('#EmailInputReg').val();
+    let password      = $('#PassInputReg').val();
+    let passwordCheck = $('#PassCheckInputReg').val()
 
     if (name != '' && email != '' && password != '' && passwordCheck == password) {
 
@@ -101,6 +104,9 @@ function createUser() {
                 "name": name,
                 "email": email,
                 "password": password
+            },
+            succes: (data) => {
+                // TODO rückmeldung in oberfläche
             },
             dataType: 'json',
         });
@@ -117,19 +123,26 @@ function createUser() {
  * @summary Creates a new event
  */
 function createEvent() {
-    var name    = $('#NameInputTA').val();
-    var plz     = $('#PLZInputTA').val();
-    var ort     = $('#OrtInputTA').val();
-    var kontakt = $('#KontaktInputTA').val();
-    var kat     = $('#kat-dropdown-anlegen :selected').text();
-    var sys     = $('#sys-dropdown-anlegen :selected').text();
-    var beschr  = $('#BeschreibungAnlegen').val();
-    var datum   = $('#DatumAnlegen').val();
+    let name    = $('#NameInputTA').val();
+    let plz     = $('#PLZInputTA').val();
+    let ort     = $('#OrtInputTA').val();
+    let kontakt = $('#KontaktInputTA').val();
+    let kat     = $('#kat-dropdown-anlegen :selected').text();
+    let sys     = $('#sys-dropdown-anlegen :selected').text();
+    let beschr  = $('#BeschreibungAnlegen').val();
+    let datum   = $('#DatumAnlegen').val();
 
     if (name != '' && plz != '' && kontakt != '' && kat != '' && sys != '') {
         $.ajax({
             url: '/events/new',
             type: 'POST',
+            beforeSend: (req) => {
+                if (window.sessionStorage.getItem("token")) {
+                    req.setRequestHeader(
+                        "Authorization",
+                        "Bearer " + window.sessionStorage.getItem("token"));
+                }
+            },
             data: {
                 "name": name,
                 "plz": plz,
@@ -139,6 +152,12 @@ function createEvent() {
                 "systemName": sys,
                 "beschreibung": beschr,
                 "datum": datum
+            },
+            success: (data) => {
+                // TODO "event erstellt"-nachricht
+            },
+            error: (data) => {
+                // TODO fehlermeldung aus server-antwort anzeigen
             },
             dataType: 'json',
         });
@@ -157,10 +176,10 @@ function createEvent() {
  * @summary Queries the server for events and displays the results
  */
 function searchEvent() {
-    var kat   = $('#kat-dropdown-suchen :selected').text();
-    var plz   = $('#PLZInputTF').val();
-    var sys   = $('#sys-dropdown-suchen :selected').text();
-    var query = {};
+    let kat   = $('#kat-dropdown-suchen :selected').text();
+    let plz   = $('#PLZInputTF').val();
+    let sys   = $('#sys-dropdown-suchen :selected').text();
+    let query = {};
 
     if (kat != '' && kat != 'Kategorie auswählen')
         query.kategorieName = kat;
@@ -171,7 +190,7 @@ function searchEvent() {
     if (sys != '' && sys != 'System auswählen')
         query.systemName = sys;
 
-    var queryString = $.param(query);
+    let queryString = $.param(query);
 
 
     // Clear old search results
@@ -181,7 +200,7 @@ function searchEvent() {
         url: "/events/src" + '?' + queryString,
         type: "GET",
         success: (data) => {
-            var liste = $('#results');
+            let liste = $('#results');
 
             if (data != '') {
                 $.each(data, (k, v) => {
@@ -196,7 +215,38 @@ function searchEvent() {
                     }
                 )
             }
+            // TODO: anzeigen, dass es keine ergebnisse gab
         }
     });
 }
 
+
+/**
+ * Takes input from 'Name' and 'Passwort' fields, checks for empty fields and performs
+ * AJAX POST to <code>/users/login</code>. On success, the received JSON Web Token is
+ * stored in SessionStorage for later authentication.
+ *
+ * @summary Logs user in and stores session token
+ */
+function login() {
+    let name     = $('#BenutzernameInputLog').val();
+    let password = $('#PassInputLog').val();
+
+    if (name != '' && password != '') {
+        $.ajax({
+            url: "/users/login",
+            type: "POST",
+            data: {
+                email: name,
+                password: password
+            },
+            success: (data) => {
+                window.sessionStorage.setItem('token', data.token);
+            },
+            error: (data) => {
+                // TODO fehlermeldung anzeigen
+            },
+            dataType: 'json'
+        });
+    }
+}

@@ -57,7 +57,7 @@ users.post("/new", async (req: Request, res: Response, next: NextFunction) => {
 });
 
 //User wird anhand der ID gelöscht
-users.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {
+users.delete("/:id", checkAuth, async (req: Request, res: Response, next: NextFunction) => {
    let id = req.params['id'];
 
    try {

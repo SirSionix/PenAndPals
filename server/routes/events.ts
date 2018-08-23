@@ -2,6 +2,7 @@ import {json, NextFunction, Router} from "express";
 import {Request, Response} from "express";
 import {Event} from "../models/Event";
 import {sequelize} from "../sequelize";
+import {checkAuth} from "../middleware/checkAuth";
 
 export const events = Router();
 
@@ -75,7 +76,7 @@ events.get("/src", async (req: Request, res: Response, next: NextFunction) => {
 });
 
 // Neuen Event erstellen nach der Definition in "Event.ts"
-events.post("/new", async (req: Request, res: Response, next: NextFunction) => {
+events.post("/new", checkAuth, async (req: Request, res: Response, next: NextFunction) => {
     try {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
